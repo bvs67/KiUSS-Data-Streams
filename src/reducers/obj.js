@@ -16,6 +16,7 @@ import { ADD_OBJ_FAIL } from '../actions/PageActions'
 import { GET_GRCOMP_REQUEST } from '../actions/PageActions'
 import { GET_GRCOMP_SUCCESS } from '../actions/PageActions'
 import { GET_GRCOMP_FAIL } from '../actions/PageActions'
+import { SET_CURRENT_ROW } from '../actions/PageActions'
 
 const initialState = {
   AddMode: false,
@@ -24,6 +25,7 @@ const initialState = {
   isFetching: false, // изначально статус загрузки - ложь
   EditKey: 0,
   GRCOMPArray: [],
+  CurrentRow: 0,
 }
 
 export function objReducer(state = initialState, action) {
@@ -32,7 +34,7 @@ export function objReducer(state = initialState, action) {
       return { ...state, isFetching: true };
 
     case GET_OBJ_SUCCESS:
-      return { ...state, OBJArray: [...action.payload], isFetching: false };
+      return { ...state, OBJArray: [...action.payload], CurrentRow: action.payload[0][0], isFetching: false };
   
     case GET_OBJ_FAIL:
       return { ...state, isFetching: false };
@@ -48,6 +50,9 @@ export function objReducer(state = initialState, action) {
   
     case TOGGLE_ADD_MODE:
       return { ...state, AddMode: action.payload };
+
+    case SET_CURRENT_ROW:
+      return { ...state, CurrentRow: action.payload };
 
     case BEGIN_EDIT_MODE:
       return { ...state, EditMode: true, EditKey: action.payload };
@@ -73,7 +78,7 @@ export function objReducer(state = initialState, action) {
     case ADD_OBJ_FAIL:
       return { ...state, isFetching: false };
   
-      case GET_GRCOMP_REQUEST:
+    case GET_GRCOMP_REQUEST:
       return { ...state, isFetching: true };
   
     case GET_GRCOMP_SUCCESS:

@@ -96,10 +96,10 @@ a.current {
 /* Блок истории установки комплектов
 -------------------------------- */
 #history-block {
-    width: 350px; /* блок под дерево */
+    width: 500px; /* блок под дерево */
     height: 800px;
     overflow-y: scroll;
-    margin-left: 70px;
+    margin-left: 50px;
     float: left; /* Обтекание по правому краю */
     border: solid; /* границы блока */
     border-color: silver gray gray silver;
@@ -107,6 +107,48 @@ a.current {
     padding: 0 0 1em 0;  /* нижний отступ */
     font-size: 1.3em;
 }
+
+.whiteDataLine
+{padding-top:1px;
+width:150px;
+    padding-right:1px;
+    padding-left:1px;
+    mso-ignore:padding;
+    color:black;
+    font-size:12.0pt;
+    font-weight:400;
+    font-style:normal;
+    text-decoration:none;
+    font-family:Calibri, sans-serif;
+    mso-font-charset:204;
+    mso-number-format:"\@";
+    text-align:left;
+    vertical-align:bottom;
+    border:1;
+    mso-background-source:auto;
+    mso-pattern:auto;
+    white-space:nowrap;}
+
+.whiteDataLine120
+{padding-top:1px;
+width:130px;
+    padding-right:1px;
+    padding-left:1px;
+    mso-ignore:padding;
+    color:black;
+    font-size:12.0pt;
+    font-weight:400;
+    font-style:normal;
+    text-decoration:none;
+    font-family:Calibri, sans-serif;
+    mso-font-charset:204;
+    mso-number-format:"\@";
+    text-align:left;
+    vertical-align:bottom;
+    border:1;
+    mso-background-source:auto;
+    mso-pattern:auto;
+    white-space:nowrap;}
 
 .whiteHeadline
 {padding-top:1px;
@@ -255,7 +297,7 @@ a.current {
             width: 720px; /* блок под дерево */
             height: 800px;
             overflow-y: scroll;
-            margin-left: 100px;
+            margin-left: 50px;
             float: left; /* Обтекание по правому краю */
             border: solid; /* границы блока */
             border-color: silver gray gray silver;

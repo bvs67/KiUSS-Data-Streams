@@ -1,17 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './KDStyle.css';
+// import { History } from '../components/History';
 
 export class Obj extends React.Component {
 
     componentDidMount() {
         this.props.saveAndReload();
+        console.log('CurrentRow =', this.props.CurrentRow);
+        this.props.setHistory(this.props.CurrentRow);
+        //var id = this.props.OBJArray[0][0];
+        //console.log(id);
+        //this.props.setHistory(id);
         //this.props.loadData();
         //this.props.loadFL();
     }
 
     onBtnClick = () => {
         this.props.saveAndReload();
+        console.log('CurrentRow =', this.props.CurrentRow);
+        this.props.setHistory(this.props.CurrentRow);
+        //var id = this.props.OBJArray[0][0];
+        //console.log(id);
         //this.props.loadData();
         //this.props.loadFL();
     };
@@ -41,6 +51,11 @@ export class Obj extends React.Component {
         // console.log(e.target.value)
         // console.log('_onChange =', this.objSelect)
     };
+
+    _showCurrent = key => {
+        console.log(key)
+        this.props.setHistory(key)
+    }
 
     onEditClick = key => {
         //if (this.props.EditMode) {
@@ -112,9 +127,17 @@ export class Obj extends React.Component {
 
     renderObj = () => {
         let lineObj = null;
+        let CurrentRowClass = "whiteLine";
         lineObj = this.props.OBJArray.map(arrLine => {
             let td_Edit, td_Buttons;
             var edit_key = Number(arrLine[0]);
+            if (this.props.CurrentRow === edit_key) { 
+                //console.log(edit_key);
+                //console.log(this.props.CurrentRow);
+                CurrentRowClass = "greyLine" 
+            } else {
+                CurrentRowClass = "whiteLine"
+            }
             if (this.props.EditMode && this.props.EditKey === edit_key) {
                 td_Edit = (
                     <td className="tableMain">
@@ -142,7 +165,7 @@ export class Obj extends React.Component {
                     </td>
                 );
             } else {
-                td_Edit = <td className="tableMain">{arrLine[2]}</td>;
+                td_Edit = <td className={CurrentRowClass}>{arrLine[2]}</td>;
                 td_Buttons = (
                     <td>
                         <button
@@ -158,8 +181,8 @@ export class Obj extends React.Component {
             //var arrLine = []
             //arrLine = f0
             return (
-                <tr key={arrLine[0]}>
-                    <td className="tableMain">{arrLine[1]}</td>
+                <tr key={arrLine[0]} onClick={this._showCurrent.bind(this, arrLine[0])}>
+                    <td className={CurrentRowClass}>{arrLine[1]}</td>
                     {td_Edit}
                     {td_Buttons}
                     <td>
@@ -197,7 +220,7 @@ export class Obj extends React.Component {
                             </td>
                         </tr>
                     </thead>
-                    <tbody onClick={this._showCurrent}>
+                    <tbody>
                         {this.renderInput()}
                         {this.renderObj()}
                     </tbody>
@@ -225,6 +248,7 @@ Obj.propTypes = {
   isFetching: PropTypes.bool.isRequired,
   EditKey: PropTypes.number,
   GRCOMPArray: PropTypes.array,
+  CurrentRow: PropTypes.number,
 };
 
 Obj.defaultProps = {
@@ -234,4 +258,5 @@ Obj.defaultProps = {
   isFetching: false,
   EditKey: 0,
   GRCOMPArray: [1],
+  CurrentRow: 0,
 };

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Obj } from '../components/Obj';
 import { Users } from '../components/Users';
+import { History } from '../components/History';
 import {
     loadOBJ,
     saveAndReload,
@@ -12,8 +13,18 @@ import {
     savedObj,
     addObj,
     loadGRCOMP,
+    setHistory,
 } from '../actions/PageActions';
 import { getUsers } from '../actions/UsersActions';
+import { 
+    histReload,
+    toggleHistMode,
+    toggleHistEdit,
+    savedHist,
+    cancelHistEdit,
+    deleteHist,
+    addHist,
+ } from '../actions/HistoryActions';
 
 class App extends Component {
     render() {
@@ -21,6 +32,7 @@ class App extends Component {
             obj,
             users,
             getUsersAction,
+            setHistoryAction,
             loadOBJAction,
             saveAndReloadAction,
             deleteObjAction,
@@ -30,6 +42,14 @@ class App extends Component {
             savedObjAction,
             addObjAction,
             loadGRCOMPAction,
+            history,
+            histReloadAction,
+            toggleHistModeAction,
+            toggleHistEditAction,
+            savedHistAction,
+            cancelHistEditAction,
+            deleteHistAction,
+            addHistAction,
         } = this.props;
         return (
             <div className="app">
@@ -52,6 +72,8 @@ class App extends Component {
                             tmp={obj.tmp}
                             GRCOMPArray={obj.GRCOMPArray}
                             loadGRCOMP={loadGRCOMPAction}
+                            setHistory={setHistoryAction}
+                            CurrentRow={obj.CurrentRow}
                         />
                     </div>
                     <div id="data-block">
@@ -62,7 +84,22 @@ class App extends Component {
                         />
                     </div>
                     <div id="history-block">
-                        История использования комплекта
+                         <History
+                            histArray={history.histArray}
+                            isFetching={history.isFetching}
+                            histReload={histReloadAction}
+                            toggleHistMode={toggleHistModeAction}
+                            AddHistMode={history.AddHistMode}
+                            HCOMArray={history.HCOMArray}
+                            toggleHistEdit={toggleHistEditAction}
+                            EditHistMode={history.EditHistMode}
+                            EditHistKey={history.EditHistKey}
+                            savedHist={savedHistAction}
+                            cancelHistEdit={cancelHistEditAction}
+                            deleteHist={deleteHistAction}
+                            addHist={addHistAction}
+                            CurrentObj={history.CurrentObj}
+                         />
                     </div>
                 </div>
             </div>
@@ -74,6 +111,7 @@ export default connect(
     store => ({
         obj: store.obj,
         users: store.users,
+        history: store.history,
     }),
     dispatch => {
         return {
@@ -87,6 +125,14 @@ export default connect(
             addObjAction: (OG, Name) => dispatch(addObj(OG, Name)),
             loadGRCOMPAction: () => dispatch(loadGRCOMP()),
             getUsersAction: () => dispatch(getUsers()),
+            histReloadAction: key => dispatch(histReload(key)),
+            setHistoryAction: key => dispatch(setHistory(key)),
+            toggleHistModeAction: mode => dispatch(toggleHistMode(mode)),
+            toggleHistEditAction: key => dispatch(toggleHistEdit(key)),
+            savedHistAction: (obj, h_beg, h_end, key) => dispatch(savedHist(obj, h_beg, h_end, key)),
+            cancelHistEditAction: key => dispatch(cancelHistEdit(key)),
+            deleteHistAction: (obj, key) => dispatch(deleteHist(obj, key)),
+            addHistAction: (obj, h_beg, h_com, id_prev) => dispatch(addHist(obj, h_beg, h_com, id_prev)),
         };
     },
 )(App);

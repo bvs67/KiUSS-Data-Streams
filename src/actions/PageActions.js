@@ -1,3 +1,5 @@
+import { getHistory } from './HistoryActions';
+
 export const GET_OBJ_REQUEST = 'GET_OBJ_REQUEST';
 export const GET_OBJ_SUCCESS = 'GET_OBJ_SUCCESS';
 export const GET_OBJ_FAIL = 'GET_OBJ_FAIL';
@@ -16,6 +18,7 @@ export const ADD_OBJ_FAIL = 'ADD_OBJ_FAIL';
 export const GET_GRCOMP_REQUEST = 'GET_GRCOMP_REQUEST';
 export const GET_GRCOMP_SUCCESS = 'GET_GRCOMP_SUCCESS';
 export const GET_GRCOMP_FAIL = 'GET_GRCOMP_FAIL';
+export const SET_CURRENT_ROW = 'SET_CURRENT_ROW';
 
 export function loadOBJ() {
     return dispatch => {
@@ -35,6 +38,16 @@ export function saveAndReload() {
     return async dispatch => {
         await dispatch(loadOBJ());
         await dispatch(loadGRCOMP());
+        // var id = this.props.OBJArray[0][0];
+        // console.log(id);
+        // this.props.setHistory(id);
+    };
+}
+
+export function setHistory(id) {
+    return async dispatch => {
+        await dispatch(setCurrentRow(id));
+        await dispatch(getHistory(id));
     };
 }
 
@@ -53,9 +66,11 @@ function requestObjSuccess(objData) {
         listItem[2] = objData[i].NameKT;
         myList[i] = listItem;
     }
+    // var id = myList[0][0];
     return {
         type: GET_OBJ_SUCCESS,
         payload: myList,
+        // curload: id,
     };
 }
 
@@ -80,6 +95,16 @@ export function toggleEdit(key) {
     return dispatch => {
         dispatch({
             type: BEGIN_EDIT_MODE,
+            payload: key,
+        });
+    };
+}
+
+export function setCurrentRow(key) {
+    //console.log('BEGIN_EDIT =', key);
+    return dispatch => {
+        dispatch({
+            type: SET_CURRENT_ROW,
             payload: key,
         });
     };
