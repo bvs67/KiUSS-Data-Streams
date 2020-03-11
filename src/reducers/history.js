@@ -26,10 +26,12 @@ const initialState = {
   CurrentObj: 0,
 }
 
+//    return { ...state, CurrentObj: action.payload, isFetching: true };
+
 export function historyReducer(state = initialState, action) {
   switch (action.type) {
     case GET_HIST_REQUEST:
-      return { ...state, CurrentObj: action.payload, isFetching: true };
+      return { ...state, isFetching: true };
 
     case GET_HIST_SUCCESS:
       return { ...state, histArray: [...action.payload], isFetching: false };

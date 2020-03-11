@@ -8,8 +8,29 @@ export class History extends React.Component {
         this.props.histReload(this.props.CurrentObj);
     };
 
-    componentDidMount() {
-        this.props.histReload(this.props.CurrentObj);
+    //componentDidMount() {
+    //    this.props.histReload(this.props.CurrentObj);
+    //}
+
+    //componentWillReceiveProps(nextProps) {
+    //    console.log('componentWillReceiveProps', nextProps)
+    //    //const { OBJArray } = this.props;
+    //    //if (!OBJArray.length && nextProps.OBJArray.length) {
+    //         //this.props.setHistory(nextProps.OBJArray[0].id);
+    //    //}
+    // }
+
+    componentDidUpdate(prevProps) {
+        // Популярный пример (не забудьте сравнить пропсы):
+        // console.log('componentDidUpdate =', this.props.CurrentObj)
+        // const { OBJArray } = this.props;
+        // console.log(OBJArray);
+         console.log(this.props);
+        if (this.props.CurrentObj !== prevProps.CurrentObj) {
+          // this.fetchData(this.props.userID);
+          // this.props.getHistory(this.props.CurrentObj);
+          this.props.histReload(this.props.CurrentObj);
+        }
     }
 
     _onChange = e => {

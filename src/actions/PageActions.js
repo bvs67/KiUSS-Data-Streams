@@ -1,4 +1,4 @@
-import { getHistory } from './HistoryActions';
+// import { getHistory } from './HistoryActions';
 
 export const GET_OBJ_REQUEST = 'GET_OBJ_REQUEST';
 export const GET_OBJ_SUCCESS = 'GET_OBJ_SUCCESS';
@@ -47,7 +47,7 @@ export function saveAndReload() {
 export function setHistory(id) {
     return async dispatch => {
         await dispatch(setCurrentRow(id));
-        await dispatch(getHistory(id));
+        // await dispatch(getHistory(id));
     };
 }
 
@@ -58,18 +58,19 @@ function requestObj() {
 }
 
 function requestObjSuccess(objData) {
-    var myList = [];
-    for (var i = 0; i < objData.length; i++) {
-        var listItem = [];
-        listItem[0] = objData[i].id;
-        listItem[1] = objData[i].NameMS;
-        listItem[2] = objData[i].NameKT;
-        myList[i] = listItem;
-    }
+    // var myList = [];
+    // for (var i = 0; i < objData.length; i++) {
+    //     var listItem = [];
+    //     listItem[0] = objData[i].id;
+    //     listItem[1] = objData[i].NameMS;
+    //     listItem[2] = objData[i].NameKT;
+    //     myList[i] = listItem;
+    // }
     // var id = myList[0][0];
     return {
         type: GET_OBJ_SUCCESS,
-        payload: myList,
+        payload: objData,
+        // payload: myList,
         // curload: id,
     };
 }

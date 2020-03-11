@@ -7,8 +7,8 @@ export class Obj extends React.Component {
 
     componentDidMount() {
         this.props.saveAndReload();
-        console.log('CurrentRow =', this.props.CurrentRow);
-        this.props.setHistory(this.props.CurrentRow);
+        //console.log('CurrentRow =', this.props.CurrentRow);
+        //this.props.setHistory(this.props.CurrentRow);
         //var id = this.props.OBJArray[0][0];
         //console.log(id);
         //this.props.setHistory(id);
@@ -18,8 +18,8 @@ export class Obj extends React.Component {
 
     onBtnClick = () => {
         this.props.saveAndReload();
-        console.log('CurrentRow =', this.props.CurrentRow);
-        this.props.setHistory(this.props.CurrentRow);
+        //console.log('CurrentRow =', this.props.CurrentRow);
+        //this.props.setHistory(this.props.CurrentRow);
         //var id = this.props.OBJArray[0][0];
         //console.log(id);
         //this.props.loadData();
@@ -39,8 +39,8 @@ export class Obj extends React.Component {
 
     onSaveClick = () => {
         // console.log('onSaveClick', this.objSelect.value, ' ', this.objInput.value)
-        console.log('onSaveClick =', this.objInput.value);
-        console.log('onSaveClick =', this.objSelect);
+        console.log('onSaveClick 1 =', this.objInput.value);
+        console.log('onSaveClick 2 =', this.objSelect);
         this.props.addObj(this.objSelect, this.objInput.value);
         //this.fieldInput.value = ''
         this.objInput.value = '';
@@ -53,7 +53,7 @@ export class Obj extends React.Component {
     };
 
     _showCurrent = key => {
-        console.log(key)
+        console.log('_showCurrent =', key)
         this.props.setHistory(key)
     }
 
@@ -130,7 +130,7 @@ export class Obj extends React.Component {
         let CurrentRowClass = "whiteLine";
         lineObj = this.props.OBJArray.map(arrLine => {
             let td_Edit, td_Buttons;
-            var edit_key = Number(arrLine[0]);
+            var edit_key = Number(arrLine.id);
             if (this.props.CurrentRow === edit_key) { 
                 //console.log(edit_key);
                 //console.log(this.props.CurrentRow);
@@ -143,7 +143,7 @@ export class Obj extends React.Component {
                     <td className="tableMain">
                         <input
                             type="text"
-                            defaultValue={arrLine[2]}
+                            defaultValue={arrLine.NameKT}
                             ref={input => {
                                 this.editInput = input;
                             }}
@@ -153,23 +153,23 @@ export class Obj extends React.Component {
                 td_Buttons = (
                     <td>
                         <button
-                            onClick={this.onEdSvClick.bind(this, arrLine[0])}
+                            onClick={this.onEdSvClick.bind(this, arrLine.id)}
                         >
                             Save
                         </button>
                         <button
-                            onClick={this.onEdCancel.bind(this, arrLine[0])}
+                            onClick={this.onEdCancel.bind(this, arrLine.id)}
                         >
                             Cancel
                         </button>
                     </td>
                 );
             } else {
-                td_Edit = <td className={CurrentRowClass}>{arrLine[2]}</td>;
+                td_Edit = <td className={CurrentRowClass}>{arrLine.NameKT}</td>;
                 td_Buttons = (
                     <td>
                         <button
-                            onClick={this.onEditClick.bind(this, arrLine[0])}
+                            onClick={this.onEditClick.bind(this, arrLine.id)}
                         >
                             Edit
                         </button>
@@ -181,13 +181,13 @@ export class Obj extends React.Component {
             //var arrLine = []
             //arrLine = f0
             return (
-                <tr key={arrLine[0]} onClick={this._showCurrent.bind(this, arrLine[0])}>
-                    <td className={CurrentRowClass}>{arrLine[1]}</td>
+                <tr key={arrLine.id} onClick={this._showCurrent.bind(this, arrLine.id)}>
+                    <td className={CurrentRowClass}>{arrLine.NameMS}</td>
                     {td_Edit}
                     {td_Buttons}
                     <td>
                         <button
-                            onClick={this.onDelClick.bind(this, arrLine[0])}
+                            onClick={this.onDelClick.bind(this, arrLine.id)}
                         >
                             Del
                         </button>
@@ -254,7 +254,7 @@ Obj.propTypes = {
 Obj.defaultProps = {
   AddMode: false,
   EditMode: false,
-  OBJArray: [1],
+  OBJArray: [],
   isFetching: false,
   EditKey: 0,
   GRCOMPArray: [1],

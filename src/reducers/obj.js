@@ -34,7 +34,7 @@ export function objReducer(state = initialState, action) {
       return { ...state, isFetching: true };
 
     case GET_OBJ_SUCCESS:
-      return { ...state, OBJArray: [...action.payload], CurrentRow: action.payload[0][0], isFetching: false };
+      return { ...state, OBJArray: [...action.payload], CurrentRow: action.payload[0].id, isFetching: false };
   
     case GET_OBJ_FAIL:
       return { ...state, isFetching: false };
