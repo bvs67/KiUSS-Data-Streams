@@ -25,7 +25,7 @@ export class History extends React.Component {
         // console.log('componentDidUpdate =', this.props.CurrentObj)
         // const { OBJArray } = this.props;
         // console.log(OBJArray);
-         console.log(this.props);
+        // console.log(this.props);
         if (this.props.CurrentObj !== prevProps.CurrentObj) {
           // this.fetchData(this.props.userID);
           // this.props.getHistory(this.props.CurrentObj);
@@ -79,13 +79,14 @@ export class History extends React.Component {
 
     onSaveClick = () => {
         // console.log('onSaveClick', this.objSelect.value, ' ', this.objInput.value)
-        console.log('onSaveClick =', this.h_begInput.value);
-        console.log('onSaveClick =', this.hcomSelect);
-        // console.log(this.props.histArray.length);
-        var hmax = this.props.histArray.length;
-        // console.log(hmax);
-        var id_prev = 0;
-        ( hmax === 0) ? ( id_prev = 0 ) : ( id_prev = this.props.histArray[hmax-1][0] );
+        // console.log('this.h_begInput.value =', this.h_begInput.value);
+        // console.log('this.hcomSelect =', this.hcomSelect);
+        // console.log('this.props.histArray.length =', this.props.histArray.length);
+        let hmax = this.props.histArray.length;
+        // console.log('hmax =', hmax);
+        let id_prev = 0;
+        // ( hmax === 0) ? ( id_prev = 0 ) : ( id_prev = this.props.histArray[hmax-1][0] );
+        ( hmax === 0) ? ( id_prev = 0 ) : ( id_prev = this.props.histArray[hmax-1].id );
         this.props.addHist(this.props.CurrentObj, this.h_begInput.value, this.hcomSelect, id_prev);
         //this.fieldInput.value = ''
         //this.objInput.value = '';
@@ -95,9 +96,9 @@ export class History extends React.Component {
         let lineObj = null;
         lineObj = this.props.histArray.map(arrLine => {
             let td_Edit1, td_Edit2, td_Buttons;
-            var edit_key = Number(arrLine[0]);
-            var s1 = String(arrLine[1])
-            var s2 = String(arrLine[2])
+            var edit_key = Number(arrLine.id);
+            var s1 = String(arrLine.h_beg)
+            var s2 = String(arrLine.h_end)
             //console.log(s1)
             //console.log(s1.substring(6,10))
             //console.log(s1.substring(3,5))
@@ -131,24 +132,24 @@ export class History extends React.Component {
                 td_Buttons = (
                     <td>
                         <button
-                            onClick={this.onEdSvClick.bind(this, arrLine[0])}
+                            onClick={this.onEdSvClick.bind(this, arrLine.id)}
                         >
                             Save
                         </button>
                         <button
-                            onClick={this.onEdCancel.bind(this, arrLine[0])}
+                            onClick={this.onEdCancel.bind(this, arrLine.id)}
                         >
                             Cancel
                         </button>
                     </td>
                 );
             } else {
-                td_Edit1 = <td className="tableMain">{arrLine[1]}</td>
-                td_Edit2 = <td className="tableMain">{arrLine[2]}</td>
+                td_Edit1 = <td className="tableMain">{arrLine.h_beg}</td>
+                td_Edit2 = <td className="tableMain">{arrLine.h_end}</td>
                 td_Buttons = (
                     <td>
                         <button
-                            onClick={this.onEditClick.bind(this, arrLine[0])}
+                            onClick={this.onEditClick.bind(this, arrLine.id)}
                         >
                             Edit
                         </button>
@@ -156,14 +157,14 @@ export class History extends React.Component {
                 );
             }
             return (
-                <tr key={arrLine[0]}>
+                <tr key={arrLine.id}>
                     {td_Edit1}
                     {td_Edit2}
-                    <td colSpan="2" className="tableMain">{arrLine[3]}</td>
+                    <td colSpan="2" className="tableMain">{arrLine.h_comment}</td>
                     {td_Buttons}
                     <td>
                         <button
-                            onClick={this.onDelClick.bind(this, arrLine[0])}
+                            onClick={this.onDelClick.bind(this, arrLine.id)}
                         >
                             Del
                         </button>
@@ -194,8 +195,8 @@ export class History extends React.Component {
                     <select onChange={this._onChange} defaultValue="Склад ЮР-5">
                         {this.props.HCOMArray.map(arrLine => {
                             return (
-                                <option key={arrLine[0]} value={arrLine[1]}>
-                                    {arrLine[1]}
+                                <option key={arrLine.num} value={arrLine.h_comment}>
+                                    {arrLine.h_comment}
                                 </option>
                             );
                         })}
@@ -259,11 +260,11 @@ History.propTypes = {
 };
 
 History.defaultProps = {
-    histArray: [[1, 2, 3, 4], [5, 6, 7, 8]],
+    histArray: [], // [[1, 2, 3, 4], [5, 6, 7, 8]],
     isFetching: false,
     AddHistMode: false,
     HCOMArray: [1],
     EditHistMode: false,
     EditHistKey: 0,
-    CurrentObj: 1,
+    CurrentObj: 0,
 };

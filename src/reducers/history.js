@@ -18,7 +18,7 @@ import { ADD_HIST_SUCCESS } from '../actions/HistoryActions'
 import { ADD_HIST_FAIL } from '../actions/HistoryActions'
 
 const initialState = {
-  histArray: [[1,2,3,4],[5,6,7,8],[9,10,11,12]],
+  histArray: [],     // [[1,2,3,4],[5,6,7,8],[9,10,11,12]],
   isFetching: false, // изначально статус загрузки - ложь
   AddHistMode: false,
   EditHistMode: false,

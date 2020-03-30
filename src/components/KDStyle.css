@@ -231,12 +231,74 @@ a.current {
     empty-cells: hide;
     width: 90px;
 }
-.hiddenCol {
-    visibility:hidden;
+.mainMenu {
+    width: 100%;
+    cellspacing: 0;
+    cellpadding: 4;
+    border: 0;
 }
-
-/* IE 6 Fixup */
-* html #multi-derevo * { height: 1%;}
-* html .marker { border-style: dotted dotted dotted solid; }
-* html .marker.open { border-style: solid dotted dotted dotted; }
-/*]]>*/
+.greenHL120 {
+    width: 120px; 
+    height: 18.75pt;
+    padding-top:1px;
+    padding-right:1px;
+    padding-left:1px;
+    mso-ignore:padding;
+    color:#92D050;
+    font-size:14.0pt;
+    font-weight:700;
+    font-style:normal;
+    text-decoration:none;
+    font-family:Calibri, sans-serif;
+    mso-font-charset:204;
+    mso-number-format:General;
+    text-align: center;
+    vertical-align: center;
+    background:#305496;
+    mso-pattern:black none;
+    white-space:nowrap;
+}
+.greenHL120:hover { text-decoration: underline; cursor:pointer; }
+.greenHL170:hover { text-decoration: underline; cursor:pointer; }
+.greenHL90:hover { text-decoration: underline; cursor:pointer; }
+.greenHL90 {
+    width: 90px; 
+    height: 18.75pt;
+    padding-top:1px;
+    padding-right:1px;
+    padding-left:1px;
+    mso-ignore:padding;
+    color:#92D050;
+    font-size:14.0pt;
+    font-weight:700;
+    font-style:normal;
+    text-decoration:none;
+    font-family:Calibri, sans-serif;
+    mso-font-charset:204;
+    mso-number-format:General;
+    text-align: center;
+    vertical-align: center;
+    background:#305496;
+    mso-pattern:black none;
+    white-space:nowrap;
+}
+.greenHL170 {
+    width: 170px; 
+    height: 18.75pt;
+    padding-top:1px;
+    padding-right:1px;
+    padding-left:1px;
+    mso-ignore:padding;
+    color:#92D050;
+    font-size:14.0pt;
+    font-weight:700;
+    font-style:normal;
+    text-decoration:none;
+    font-family:Calibri, sans-serif;
+    mso-font-charset:204;
+    mso-number-format:General;
+    text-align: center;
+    vertical-align: center;
+    background:#305496;
+    mso-pattern:black none;
+    white-space:nowrap;}

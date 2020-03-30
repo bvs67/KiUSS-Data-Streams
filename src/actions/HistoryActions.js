@@ -60,18 +60,19 @@ function requestHistory(id) {
 }
 
 function requestHistorySuccess(history) {
-    var myList = []
-    for (var i = 0; i < history.length; i++) {
-        var listItem = []
-        listItem[0]=history[i].id
-        listItem[1]=history[i].h_beg
-        listItem[2]=history[i].h_end
-        listItem[3]=history[i].h_comment
-        myList[i] = listItem
-    }
+     // var myList = []
+     // for (var i = 0; i < history.length; i++) {
+     //     var listItem = []
+     //     listItem[0]=history[i].id
+     //     listItem[1]=history[i].h_beg
+     //     listItem[2]=history[i].h_end
+     //     listItem[3]=history[i].h_comment
+     //     myList[i] = listItem
+     // }
     return {
         type: GET_HIST_SUCCESS,
-        payload: myList,
+        payload: history,
+        // payload: myList,
     };
 }
 
@@ -103,16 +104,17 @@ function requestHCOM() {
 }
 
 function requestHCOMSuccess(HCOMData) {
-    var myList = [];
-    for (var i = 0; i < HCOMData.length; i++) {
-        var listItem = [];
-        listItem[0] = HCOMData[i].num;
-        listItem[1] = HCOMData[i].h_comment;
-        myList[i] = listItem;
-    }
+    // var myList = [];
+    // for (var i = 0; i < HCOMData.length; i++) {
+    //     var listItem = [];
+    //     listItem[0] = HCOMData[i].num;
+    //     listItem[1] = HCOMData[i].h_comment;
+    //     myList[i] = listItem;
+    // }
     return {
         type: GET_HCOM_SUCCESS,
-        payload: myList,
+        payload: HCOMData,
+        // payload: myList,
     };
 }
 

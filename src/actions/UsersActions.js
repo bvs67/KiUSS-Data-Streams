@@ -1,6 +1,9 @@
 export const GET_USERS_REQUEST = 'GET_USERS_REQUEST';
 export const GET_USERS_SUCCESS = 'GET_USERS_SUCCESS';
 export const GET_USERS_FAIL = 'GET_USERS_FAIL';
+export const GET_USER_REQUEST = 'GET_USER_REQUEST';
+export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
+export const GET_USER_FAIL = 'GET_USER_FAIL';
 
 export function getUsers() {
     return dispatch => {
@@ -44,6 +47,43 @@ function requestUsersSuccess(users) {
 function requestUsersFail(err) {
     return {
         type: GET_USERS_FAIL,
+        payload: err
+    };
+}
+
+export function getUser(id) {
+    var myRequest = new Request('/user?id=' + id);
+    // console.log(myRequest)
+    return dispatch => {
+        dispatch(requestUser(id));
+        return fetch(myRequest)
+            .then(response => response.json())
+            .then(response => {
+                dispatch(requestUserSuccess(response.data));
+            })
+            .catch(err => {
+                dispatch(requestUserFail(err));
+            });
+    };
+}
+
+function requestUser(id) {
+    return {
+        type: GET_USER_REQUEST,
+        payload: id,
+    };
+}
+
+function requestUserSuccess(user) {
+    return {
+        type: GET_USER_SUCCESS,
+        payload: user,
+    };
+}
+
+function requestUserFail(err) {
+    return {
+        type: GET_USER_FAIL,
         payload: err
     };
 }

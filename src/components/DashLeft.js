@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './KDStyle.css';
 // import { History } from '../components/History';
 
-export class Obj extends React.Component {
+export class DashLeft extends React.Component {
 
     componentDidMount() {
         this.props.saveAndReload();
