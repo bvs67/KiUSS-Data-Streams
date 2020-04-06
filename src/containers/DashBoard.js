@@ -1,33 +1,55 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Users } from '../components/Users';
-//import { Obj } from '../components/Obj';
-// import { loadOBJ, } from '../actions/PageActions';
-import { getUsers } from '../actions/UsersActions';
-
- export class DashBoard extends Component {
+import { DashLeft } from '../components/DashLeft';
+import { DashRight } from '../components/DashRight';
+import { DashCenter } from '../components/DashCenter';
+import {
+    loadOBJ,
+    setHistory,
+} from '../actions/ObjActions';
+import { 
+    histReload,
+} from '../actions/HistoryActions';
+import { 
+    compReload,
+} from '../actions/CompActions';
+export class DashBoard extends Component {
     render() {
         const {
-//            obj,
-//            loadOBJAction,
-            users,
-            getUsersAction,
+            dashleft,
+            loadOBJAction,
+            setHistoryAction,
+            dashright,
+            histReloadAction,
+            dashcenter,
+            compReloadAction,
         } = this.props;
         return (
                 <div id="main-block">
                     <div id="kds-obj">
-                        Список комплектов УМБ
+                        <DashLeft 
+                            OBJArray={dashleft.OBJArray}
+                            loadOBJ={loadOBJAction}
+                            isFetching={dashleft.isFetching}
+                            setHistory={setHistoryAction}
+                            CurrentRow={dashleft.CurrentRow}
+                        />
                     </div>
                     <div id="data-block">
-                        Список пользователей
-                        <Users
-                            dataArray={users.dataArray}
-                            isFetching={users.isFetching}
-                            getUsers={getUsersAction}
+                        <DashCenter
+                            compArray={dashcenter.compArray}
+                            isFetching={dashcenter.isFetching}
+                            compReload={compReloadAction}
+                            CurrentComp={dashleft.CurrentRow}
                         />
                     </div>
                     <div id="history-block">
-                        История установки комплекта
+                        <DashRight
+                            histArray={dashright.histArray}
+                            isFetching={dashright.isFetching}
+                            histReload={histReloadAction}
+                            CurrentObj={dashleft.CurrentRow}
+                        />
                     </div>
                 </div>
         );
@@ -36,11 +58,16 @@ import { getUsers } from '../actions/UsersActions';
 
 export default connect(
     store => ({
-        users: store.users,
+        dashleft: store.dashleft,
+        dashright: store.dashright,
+        dashcenter: store.dashcenter,
     }),
     dispatch => {
         return {
-            getUsersAction: () => dispatch(getUsers()),
+            loadOBJAction: () => dispatch(loadOBJ()),
+            setHistoryAction: key => dispatch(setHistory(key)),
+            histReloadAction: key => dispatch(histReload(key)),
+            compReloadAction: key => dispatch(compReload(key)),
         };
     },
 )(DashBoard);

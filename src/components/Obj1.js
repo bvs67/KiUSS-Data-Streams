@@ -1,26 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './KDStyle.css';
+// import { History } from '../components/History';
 
-export class DashLeft extends React.Component {
+export class Obj extends React.Component {
 
     componentDidMount() {
         this.props.loadOBJ();
-    }
-
-    onBtnClick = () => {
-        this.props.loadOBJ();
-    };
-
-    _onChange = e => {
-        this.objSelect = e.target.value;
-        // console.log(e.target.value)
-        // console.log('_onChange =', this.objSelect)
-    };
-
-    _showCurrent = key => {
-        // console.log('_showCurrent =', key)
-        this.props.setHistory(key)
     }
 
     renderObj = () => {
@@ -28,22 +14,20 @@ export class DashLeft extends React.Component {
         let CurrentRowClass = "whiteLine";
         lineObj = this.props.OBJArray.map(arrLine => {
             let td_Edit, td_Buttons;
-            var edit_key = Number(arrLine.id);
-            if (this.props.CurrentRow === edit_key) { 
-                //console.log(edit_key);
-                //console.log(this.props.CurrentRow);
-                CurrentRowClass = "greyLine" 
-            } else {
-                CurrentRowClass = "whiteLine"
-            }
+            CurrentRowClass = "whiteLine"
                 td_Edit = <td className={CurrentRowClass}>{arrLine.NameKT}</td>;
-                td_Buttons = null;
+                td_Buttons = (
+                    <td>
+                    </td>
+                );
             return (
-                <tr key={arrLine.id} onClick={this._showCurrent.bind(this, arrLine.id)}>
+                <tr key={arrLine.id} >
                     <td className={CurrentRowClass}>{arrLine.NameMS}</td>
                     {td_Edit}
                     {td_Buttons}
-                    <td> </td>
+                    <td>
+                        
+                    </td>
                 </tr>
             );
         }, this);
@@ -57,6 +41,7 @@ export class DashLeft extends React.Component {
         return (
             <React.Fragment>
                 <h4 className="redHeadLine">Комплекты УМБ</h4>
+
                 <table>
                     <thead>
                         <tr className="whiteHeadline">
@@ -71,9 +56,6 @@ export class DashLeft extends React.Component {
                         {this.renderObj()}
                     </tbody>
                 </table>
-                <button className="buttons" onClick={this.onBtnClick}>
-                    Load Data
-                </button>
 
                 {isFetching ? (
                     <p>Загрузка...</p>
@@ -85,15 +67,13 @@ export class DashLeft extends React.Component {
     }
 }
 
-DashLeft.propTypes = {
+Obj.propTypes = {
   OBJArray: PropTypes.array,
   loadOBJ: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
-  CurrentRow: PropTypes.number,
 };
 
-DashLeft.defaultProps = {
+Obj.defaultProps = {
   OBJArray: [],
   isFetching: false,
-  CurrentRow: 0,
 };

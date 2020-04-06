@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 //import PageContainer from '../containers/PageContainer' // изменили импорт
 import { MenuPad } from '../components/MenuPad';
 import Contact from '../containers/Contact';
+import Shipment from '../containers/Shipment';
 import Admin from '../containers/Admin';
 import DashBoard from '../containers/DashBoard';
 import { getMenuPoint } from '../actions/MenuActions';
@@ -24,11 +25,11 @@ class App extends Component {
                 menu_point =  ( <Contact /> );
                 break;
             case 2:
-                menu_point =  ( <DashBoard /> );
+                menu_point =  ( <Shipment /> );
                 //console.log(menu_point);
                 break;
             case 3:
-                menu_point =  ( <Admin /> );
+                menu_point =  ( <DashBoard /> );
                 break;
             case 4:
                 menu_point =  ( <DashBoard /> );

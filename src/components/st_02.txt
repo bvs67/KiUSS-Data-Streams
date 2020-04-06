@@ -1,0 +1,22 @@
+<div>
+                    {this.props.strucArray.map((node, i) => {
+                        const dbid = node.dbid;
+                        const NameKS = node.NameKS;
+
+                        const NameRG = node.NameRG;
+                        const NameDO = node.NameDO;
+                        const NameMS = node.NameMS;
+                  
+                        const label = <span className="node">{NameKS}</span>;
+                        const label2 = <span className="node">{NameMS}</span>;
+                        return (
+                            <TreeView key={dbid} nodeLabel={label} defaultCollapsed={false}>
+                                <TreeView nodeLabel={label2} key={NameKS} defaultCollapsed={false}>
+                                    <div className="info">Регион: {NameRG}</div>
+                                    <div className="info">ОГ: {NameDO}</div>
+                                    <div className="info">Месторождение: {NameMS}</div>
+                                </TreeView>
+                            </TreeView>
+                        );
+                    })}
+                </div>

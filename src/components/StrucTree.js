@@ -171,13 +171,13 @@ export class StrucTree extends React.Component {
     }
 }
 
-History.propTypes = {
+StrucTree.propTypes = {
     strucArray: PropTypes.array,
     CurrentNode: PropTypes.string,
     isFetching: PropTypes.bool.isRequired,
 };
 
-History.defaultProps = {
+StrucTree.defaultProps = {
     strucArray: [],
     CurrentNode: "0",
     isFetching: false, // изначально статус загрузки - ложь

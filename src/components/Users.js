@@ -25,6 +25,13 @@ export class Users extends React.Component {
         }
     }
 
+    _onClick = (e) => {
+        // e.preventDefault();
+        console.log('По ссылке кликнули =', e);
+        console.log('CurrentRow =', this.props.Node);
+        // this.props.setNode(e);
+    };
+
     renderUsers = () => {
         let lineObj = null;
         lineObj = this.props.dataArray.map(arrLine => {
@@ -49,7 +56,7 @@ export class Users extends React.Component {
                     <td className="tableMain">{arrLine.Name}</td>
                     <td className="tableMain">{arrLine.Phone_01}</td>
                     <td className="tableMain">{arrLine.Email_01}</td>
-                    <td className="tableMain">{arrLine.HComment}</td>
+                    <td className="tableMain">{<a href="#" onClick={this._onClick.bind(this, arrLine.id)}>{arrLine.HComment}</a>}</td>
                 </tr>
             );
         }, this);
