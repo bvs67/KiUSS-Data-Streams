@@ -9,6 +9,10 @@ import { getUsers } from '../actions/UsersActions';
 import { getUser } from '../actions/UsersActions';
 import { setNode } from '../actions/StrucActions';
 
+import { getMenuPoint } from '../actions/MenuActions';
+// import { setHistory } from '../actions/ObjActions';
+import { setCurrentId } from '../actions/GlobalActions';
+
 export class Contact extends Component {
     render() {
         const {
@@ -18,6 +22,9 @@ export class Contact extends Component {
             users,
             getUsersAction,
             getUserAction,
+            getMenuPointAction,
+//            setHistoryAction,
+            setCurrentIdAction, 
         } = this.props;
         return (
                 <div id="main-block">
@@ -38,6 +45,8 @@ export class Contact extends Component {
                             getUsers={getUsersAction}
                             getUser={getUserAction}
                             Node={structree.CurrentNode}
+                            getMenuPoint={getMenuPointAction}
+                            setCurrentId={setCurrentIdAction}
                         />
                     </div>
                     <div id="history-block">
@@ -52,13 +61,16 @@ export default connect(
     store => ({
         structree: store.structree,
         users: store.users,
+        global: store.global,
     }),
     dispatch => {
         return {
             getStrucTreeAction: () => dispatch(getStrucTree()),
             getUsersAction: () => dispatch(getUsers()),
             getUserAction: (id) => dispatch(getUser(id)),
-            setNodeAction: (node) => dispatch(setNode(node))
+            setNodeAction: (node) => dispatch(setNode(node)),
+            getMenuPointAction: (id) => dispatch(getMenuPoint(id)),
+            setCurrentIdAction: (id) => dispatch(setCurrentId(id)),
         };
     },
 )(Contact);

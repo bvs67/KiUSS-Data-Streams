@@ -29,6 +29,9 @@ export class Users extends React.Component {
         // e.preventDefault();
         console.log('По ссылке кликнули =', e);
         console.log('CurrentRow =', this.props.Node);
+        this.props.setCurrentId(e);
+        this.props.getMenuPoint(3);
+        // this.props.setHistory(e);
         // this.props.setNode(e);
     };
 

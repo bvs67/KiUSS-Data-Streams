@@ -13,6 +13,9 @@ import {
 import { 
     compReload,
 } from '../actions/CompActions';
+import {
+    loadDASH,
+} from '../actions/DashActions';
 export class DashBoard extends Component {
     render() {
         const {
@@ -23,6 +26,7 @@ export class DashBoard extends Component {
             histReloadAction,
             dashcenter,
             compReloadAction,
+            loadDASHAction,
         } = this.props;
         return (
                 <div id="main-block">
@@ -33,6 +37,8 @@ export class DashBoard extends Component {
                             isFetching={dashleft.isFetching}
                             setHistory={setHistoryAction}
                             CurrentRow={dashleft.CurrentRow}
+                            loadDASH={loadDASHAction}
+                            CurrentId={global.CurrentId}
                         />
                     </div>
                     <div id="data-block">
@@ -61,6 +67,7 @@ export default connect(
         dashleft: store.dashleft,
         dashright: store.dashright,
         dashcenter: store.dashcenter,
+        global: store.global,
     }),
     dispatch => {
         return {
@@ -68,6 +75,7 @@ export default connect(
             setHistoryAction: key => dispatch(setHistory(key)),
             histReloadAction: key => dispatch(histReload(key)),
             compReloadAction: key => dispatch(compReload(key)),
+            loadDASHAction: (id) => dispatch(loadDASH(id)),
         };
     },
 )(DashBoard);

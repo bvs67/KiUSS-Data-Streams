@@ -9,6 +9,7 @@ import { dashrightReducer } from './dashright'
 import { dashcenterReducer } from './dashcenter'
 import { shipReducer } from './ship'
 import { shipdetReducer } from './shipdet'
+import { globalReducer } from './global'
 
 export const rootReducer = combineReducers({
    obj: objReducer,
@@ -21,4 +22,5 @@ export const rootReducer = combineReducers({
    dashcenter: dashcenterReducer,
    ship: shipReducer,
    shipdet: shipdetReducer,
+   global: globalReducer,
 })

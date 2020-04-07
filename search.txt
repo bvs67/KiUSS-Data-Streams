@@ -1,0 +1,57 @@
+https://github.com/reduxjs/redux-thunk
+actions redux thunk
+
+https://medium.com/@stowball/a-dummys-guide-to-redux-and-thunk-in-react-d8904a7005d3
+redux thunk fetch example
+
+https://jsonformatter.curiousconcept.com/
+
+Alexander Schcerbakov, [11.03.20 00:17]
+https://reactjs.org/docs/hello-world.html
+
+Alexander Schcerbakov, [11.03.20 00:19]
+https://learn.javascript.ru/
+
+Alexander Schcerbakov, [11.03.20 00:30]
+componentWillRecieveProps(nextProps) {
+    const { objArray } = this.props;
+    if (!objArray.length && nextProps.objArray.length) {
+         this.props.setHistory(nextProps.objArray[0].id);
+    }
+}
+
+Такой вариант не рпботает, потому что из компонента History.js не видно пропсы компонента Obj.js
+В процедуре componentWillRecieveProps например делаем console.log(this.props) получаем:
+
+{histArray: Array(4), isFetching: false, AddHistMode: false, histReload: f, toggleHistMode: f, …}
+histArray: Array(4)
+0: (4) [62, "05.03.2020", "06.03.2020", "12 куст ЮТМ"]
+1: (4) [70, "08.03.2020", "09.03.2020", "Склад ЮР-5"]
+2: (4) [71, "10.03.2020", "19.03.2020", "Скв. 90 ЮТМ"]
+3: (4) [86, "20.03.2020", null, "Склад ЮР-5"]
+length: 4
+__proto__: Array(0)
+isFetching: false
+histReload: key => {…}
+toggleHistMode: mode => {…}
+AddHistMode: false
+HCOMArray: (36) [Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2)]
+toggleHistEdit: key => {…}
+EditHistMode: false
+EditHistKey: 0
+savedHist: (obj, h_beg, h_end, key) => {…}
+cancelHistEdit: key => {…}
+deleteHist: (obj, key) => {…}
+addHist: (obj, h_beg, h_com, id_prev) => {…}
+CurrentObj: 82
+__proto__: Object
+
+Работает вариант, который сегодня подгружен на Гитхабе, version 1.0.1.
+Там оставлены пропсы obj.CurrentRow и history.CurrentObj, которые обновляются по Subscribe в модуле configureStore.js:
+export const unsubscribe = store.subscribe(() => { store.getState().history.CurrentObj = store.getState().obj.CurrentRow })
+
+После этого в History.js вызывается метод componentDidUpdate(prevProps) { if (this.props.CurrentObj !== prevProps.CurrentObj) { this.props.histReload(this.props.CurrentObj); } }
+поскольку в документации метод componentWillReceiveProps объявлен устаревшим:
+https://ru.reactjs.org/docs/react-component.html
+
+Может быть, лучше сделать подписку CurrentObj на изменение CurrentRow в контейнере App.js в функции connect? Как это лучше сделать?

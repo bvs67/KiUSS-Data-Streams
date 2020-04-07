@@ -5,7 +5,10 @@ import './KDStyle.css';
 export class DashLeft extends React.Component {
 
     componentDidMount() {
-        this.props.loadOBJ();
+        // this.props.loadOBJ();
+        let id = this.props.CurrentId;
+        console.log("this.props.CurrentId =", id)
+        this.props.loadDASH(id);
     }
 
     onBtnClick = () => {
@@ -21,6 +24,15 @@ export class DashLeft extends React.Component {
     _showCurrent = key => {
         // console.log('_showCurrent =', key)
         this.props.setHistory(key)
+    }
+
+    componentDidUpdate(prevProps) {
+        // Популярный пример (не забудьте сравнить пропсы):
+        console.log("DashLeft CurrentRow =", this.props.CurrentRow);
+        // console.log("prevProps.CurrentComp =", prevProps.CurrentComp);
+        if (this.props.CurrentRow !== prevProps.CurrentRow) {
+            this.props.setHistory(this.props.CurrentRow);
+        }
     }
 
     renderObj = () => {
@@ -90,10 +102,12 @@ DashLeft.propTypes = {
   loadOBJ: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
   CurrentRow: PropTypes.number,
+  CurrentId: PropTypes.number,
 };
 
 DashLeft.defaultProps = {
   OBJArray: [],
   isFetching: false,
   CurrentRow: 0,
+  CurrentId: 0,
 };
