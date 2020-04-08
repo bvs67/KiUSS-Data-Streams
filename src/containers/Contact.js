@@ -12,6 +12,7 @@ import { setNode } from '../actions/StrucActions';
 import { getMenuPoint } from '../actions/MenuActions';
 // import { setHistory } from '../actions/ObjActions';
 import { setCurrentId } from '../actions/GlobalActions';
+import { getStrucDash } from '../actions/DashActions';
 
 export class Contact extends Component {
     render() {
@@ -23,8 +24,9 @@ export class Contact extends Component {
             getUsersAction,
             getUserAction,
             getMenuPointAction,
-//            setHistoryAction,
-            setCurrentIdAction, 
+            getStrucDashAction,
+            setCurrentIdAction,
+            global, 
         } = this.props;
         return (
                 <div id="main-block">
@@ -35,6 +37,8 @@ export class Contact extends Component {
                             getStrucTree={getStrucTreeAction}
                             CurrentNode={structree.CurrentNode}
                             setNode={setNodeAction}
+                            getStrucDash={getStrucDashAction}
+                            CurNodeId={global.CurNodeId}
                         />
                     </div>
                     <div id="data-block">
@@ -71,6 +75,7 @@ export default connect(
             setNodeAction: (node) => dispatch(setNode(node)),
             getMenuPointAction: (id) => dispatch(getMenuPoint(id)),
             setCurrentIdAction: (id) => dispatch(setCurrentId(id)),
+            getStrucDashAction: (node) => dispatch(getStrucDash(node)),
         };
     },
 )(Contact);

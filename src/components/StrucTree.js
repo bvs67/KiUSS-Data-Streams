@@ -8,7 +8,10 @@ import PropTypes from 'prop-types';
 export class StrucTree extends React.Component {
     
     componentDidMount() {
-        this.props.getStrucTree();
+        // this.props.getStrucTree();
+        let node = this.props.CurNodeId;
+        console.log("this.props.CurNodeId =", node);
+        this.props.getStrucDash(node);
     }
 
     _onClick = (e) => {
@@ -175,10 +178,12 @@ StrucTree.propTypes = {
     strucArray: PropTypes.array,
     CurrentNode: PropTypes.string,
     isFetching: PropTypes.bool.isRequired,
+    CurNodeId: PropTypes.string,
 };
 
 StrucTree.defaultProps = {
     strucArray: [],
     CurrentNode: "0",
     isFetching: false, // изначально статус загрузки - ложь
+    CurNodeId: "0",
 };

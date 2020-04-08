@@ -23,6 +23,8 @@ export class DashCenter extends React.Component {
         console.log('По ссылке кликнули =', e);
         //console.log('CurrentRow =', this.props.Node);
         // this.props.setNode(e);
+        this.props.setCurNodeId(e);
+        this.props.getMenuPoint(1);
     };
 
     renderComp1 = () => {

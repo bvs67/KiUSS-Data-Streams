@@ -12,6 +12,7 @@ const initialState = {
   OBJArray: [],
   isFetching: false, // изначально статус загрузки - ложь
   CurrentRow: 0,
+  CurrentId: 0,
 }
 
 export function dashleftReducer(state = initialState, action) {

@@ -16,6 +16,8 @@ import {
 import {
     loadDASH,
 } from '../actions/DashActions';
+import { getMenuPoint } from '../actions/MenuActions';
+import { setCurNodeId } from '../actions/GlobalActions';
 export class DashBoard extends Component {
     render() {
         const {
@@ -27,6 +29,9 @@ export class DashBoard extends Component {
             dashcenter,
             compReloadAction,
             loadDASHAction,
+            global,
+            getMenuPointAction,
+            setCurNodeIdAction,
         } = this.props;
         return (
                 <div id="main-block">
@@ -47,6 +52,8 @@ export class DashBoard extends Component {
                             isFetching={dashcenter.isFetching}
                             compReload={compReloadAction}
                             CurrentComp={dashleft.CurrentRow}
+                            getMenuPoint={getMenuPointAction}
+                            setCurNodeId={setCurNodeIdAction}
                         />
                     </div>
                     <div id="history-block">
@@ -76,6 +83,8 @@ export default connect(
             histReloadAction: key => dispatch(histReload(key)),
             compReloadAction: key => dispatch(compReload(key)),
             loadDASHAction: (id) => dispatch(loadDASH(id)),
+            getMenuPointAction: (id) => dispatch(getMenuPoint(id)),
+            setCurNodeIdAction: (id) => dispatch(setCurNodeId(id)),
         };
     },
 )(DashBoard);
